@@ -1,0 +1,130 @@
+<!DOCTYPE html><html lang="en" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Vattavada Trip Expenses</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js"></script>
+<style>
+:root{--bg:#f3f8f5;--cd:#fff;--tx:#1b2a23;--mu:#5c6e65;--bd:#dde8e2;--pr:#356854;--pl:#e4efe9;--ok:#1f8a4c;--wn:#b7791f;--er:#c0392b;--sh:0 4px 18px rgba(53,104,84,.1);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1814;--cd:#16251e;--tx:#e8f1ec;--mu:#9db3a8;--bd:#274037;--pr:#5fa886;--pl:#1e372c;--sh:none;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0e1814;--cd:#16251e;--tx:#e8f1ec;--mu:#9db3a8;--bd:#274037;--pr:#5fa886;--pl:#1e372c;--sh:none;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px);height:100%}*{box-sizing:border-box}
+body{margin:0;min-height:100%;background:var(--bg);color:var(--tx);font:15px/1.5 'Plus Jakarta Sans',system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--cd);z-index:10}
+.hd{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--cd);border-bottom:1px solid var(--bd)}
+.hi{max-width:1100px;margin:auto;padding:10px 16px 6px;display:flex;gap:12px;align-items:center;justify-content:space-between}
+.logo{display:flex;gap:10px;align-items:center;font-weight:800;font-size:17px}.logo small{display:block;font-weight:400;color:var(--mu);font-size:12px}
+.lg{background:var(--pr);color:#fff;border-radius:12px;padding:8px;display:grid}
+nav{display:flex;gap:6px;overflow-x:auto;padding:4px 16px 10px;max-width:1100px;margin:auto;scrollbar-width:none}
+nav a{white-space:nowrap;display:flex;gap:6px;align-items:center;padding:8px 13px;border-radius:999px;text-decoration:none;color:var(--mu);font-weight:600;font-size:13px;background:var(--pl);transition:.2s}
+nav a.on{background:var(--pr);color:#fff}
+main{max-width:1100px;margin:auto;padding:16px}
+h2{font-size:20px;margin:22px 0 10px;display:flex;gap:8px;align-items:center}h3{font-size:15px;margin:0 0 8px}
+svg.i{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.g{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(165px,1fr))}.g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.c{background:var(--cd);border:1px solid var(--bd);border-radius:18px;padding:16px;box-shadow:var(--sh);animation:up .45s both;min-width:0}
+@keyframes up{from{opacity:0;transform:translateY(8px)}}
+.hero{background:linear-gradient(135deg,#356854,#244a3a);color:#fff;border:0}.hero p{margin:4px 0;opacity:.95}.rw{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.22)}.rw span{text-align:left}.rw b{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}.rw.h{font-size:18px;padding-top:4px}.hero h3+.rw{margin-top:2px}.hero .rw+p{margin-top:12px}
+.st .ic{width:34px;height:34px;border-radius:10px;background:var(--pl);color:var(--pr);display:grid;place-items:center;margin-bottom:8px}
+.st b{font-size:22px;display:block;line-height:1.2}.st span{color:var(--mu);font-size:12.5px;display:block}.st em{font-style:normal;color:var(--mu);font-size:11.5px}
+.tb{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+input,select,.b{font:inherit;font-size:14px;padding:9px 12px;border:1px solid var(--bd);border-radius:12px;background:var(--cd);color:var(--tx)}
+input{flex:1;min-width:150px}.b{cursor:pointer;display:inline-flex;gap:6px;align-items:center;font-weight:600;color:var(--pr)}.b:hover{background:var(--pl)}
+.hero .b{background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.35)}
+.tw{overflow-x:auto;border:1px solid var(--bd);border-radius:14px;background:var(--cd);margin-bottom:12px}
+table{border-collapse:collapse;width:100%;font-size:13.5px}th{background:var(--pl);text-align:left;padding:10px 12px;white-space:nowrap;cursor:pointer;user-select:none}
+td{padding:9px 12px;border-top:1px solid var(--bd);white-space:nowrap}.n{text-align:right}tfoot td{font-weight:800;background:var(--pl)}
+tr.xr{cursor:pointer}tr.xr:hover td{background:var(--pl)}td.xd{white-space:normal;background:var(--pl)}
+.bd{padding:3px 9px;border-radius:99px;font-size:12px;font-weight:600;background:var(--pl)}.Paid{color:var(--ok)}.PartiallyPaid{color:var(--wn)}.Pending{color:var(--er)}
+.bar{height:9px;border-radius:9px;background:var(--pl);overflow:hidden;display:flex;min-width:100px}.bar i{background:var(--pr)}.bar i+i{background:#9fc8b3}
+.kv{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));margin:0 0 12px}.kv div{background:var(--cd);border:1px solid var(--bd);border-radius:14px;padding:10px 14px}.kv span{display:block;color:var(--mu);font-size:12px}.kv b{font-size:15px}
+.note{border-left:4px solid var(--wn);background:var(--cd);border-radius:10px;padding:10px 14px;margin:10px 0;font-size:13.5px;color:var(--mu)}.note b{color:var(--tx)}
+.ch{position:relative;height:300px}.ch.t{height:420px}
+footer{max-width:1100px;margin:20px auto;padding:16px;color:var(--mu);font-size:12.5px;text-align:center}
+@media print{body::before,.hd,.noprint,.tb{display:none}body{background:#fff;color:#000}.c{box-shadow:none;break-inside:avoid;animation:none}.ps{break-before:page}.ps:first-child{break-before:auto}.tw{overflow:visible}td,th{white-space:normal}}
+</style></head><body>
+<header class="hd"><div class="hi"><div class="logo"><span class="lg" id="lg"></span><div>Vattavada Trip Expenses<small>Group expense report</small></div></div><button class="b noprint" id="pr"></button></div><nav id="nav" class="noprint"></nav></header>
+<main id="app"></main>
+<footer>Built from the trip workbook (Trip_Expense_Summary.xlsx) · Last updated 14 November 2026 · All amounts in ₹ · Please report any mismatch to the trip organiser.</footer>
+<script>
+const IC={layout:'<rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/>',users:'<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',utensils:'<path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/>',bus:'<path d="M8 6v6"/><path d="M15 6v6"/><path d="M2 12h19.6"/><path d="M18 18h3s.5-1.7.8-2.8c.1-.4.2-.8.2-1.2 0-.4-.1-.8-.2-1.2l-1.4-5C20.1 6.8 19.1 6 18 6H4a2 2 0 0 0-2 2v10h3"/><circle cx="7" cy="18" r="2"/><path d="M9 18h5"/><circle cx="16" cy="18" r="2"/>',bed:'<path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/>',car:'<path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/>',ticket:'<path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2"/><path d="M13 17v2"/><path d="M13 11v2"/>',brief:'<path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/>',dl:'<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/>',print:'<path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6"/><rect x="6" y="14" width="12" height="8" rx="1"/>',wallet:'<path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"/><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"/>',rs:'<path d="M6 3h12"/><path d="M6 8h12"/><path d="m6 13 8.5 8"/><path d="M6 13h3"/><path d="M9 13c6.667 0 6.667-10 0-10"/>',ok:'<path d="M20 6 9 17l-5-5"/>',warn:'<path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/>'};
+const I=k=>`<svg class="i" viewBox="0 0 24 24" aria-hidden="true">${IC[k]}</svg>`;
+/* ===== DATA (copied from workbook sheets) ===== */
+const D={trip:{dest:'Vattavada',start:'2026-11-07',dur:'2 Days / 1 Night',n:14,veh:'17-Seater Traveller',inc:'Parking & Toll'},
+mem:['Arunima S','Aparna R','Sneha C','Dinesh PM','Jissmary George','Jissmon','Praveen','Prince Thomas','Sajan','Sreekutty L','Soumya N','Sethulekshmi M','Shaym','Thomas Mathew'].map(n=>[n,3000,3000,'Paid','Pending']),
+bf:[['Arunima S','Poori with Curry',1,75,'Coffe',1,30],['Aparna R','Ghee roast',1,85,'Tea',1,15],['Sreekuttan','Masala Dosa',1,85],['Sneha C','Idly',2,15,'Tea',1,15],['Dinesh PM','Idly',3,15,'Tea',1,15],['Jissmary George','Ghee roast',1,85],['Jissmon','Idly',3,15,'Coffe',1,30],['Praveen','Ghee roast',1,85,'Tea',1,15],['Prince Thomas','Poori with Curry',1,75,'Coffe',1,30],['Sajan','Idly',3,15,'Tea',1,15],['Sreekutty L','Poori with Curry',1,75,'Black tea',1,10],['Soumya N','Poori with Curry',1,75],['Sethulekshmi M','Poori with Curry',1,75,'Coffe',1,30],['Shaym','Masala Dosa',1,85,'Plain Poori',2,16],['Thomas Mathew','Ghee roast',1,85]],
+gst:4.33,tea:['Arunima S','Aparna R','Sneha C','Jissmon','Praveen','Prince Thomas','Sajan','Sreekutty L','Thomas Mathew'],teaR:20,
+bill:[['Poori with Curry (3 Nos.)',5,75],['Ghee Roast',4,85],['Masala Dosa',2,85],['Vada',1,16],['Filter Coffee',4,30],['Tea',5,15],['Plain Poori',2,16],['Idly',11,15],['Black Tea',1,10]],cg:32.58,sg:32.58,ro:-0.16,
+trv:[['Base Package','350 KM flat rate','₹14,500',0],['Base Distance Included','Covered in package','350 Km',0],['Extra KM Rate','Per km beyond 350','24 / Km',0],['Advance Paid','Paid at booking',2000,1],['Total Distance Travelled','Actual odometer reading','387 Km',0],['Extra Distance','387 − 350 km','37 Km',0],['Fuel Charges Paid','Fuel Charges Paid',3500,1],['Extra KM Charges','37 × ₹24 = ₹888 → Rounded',900,1],['Refund / Discount Received','',500,0],['Tip Paid to Driver','',500,0],['Remaining Amount Paid','Paid to Vishnu (owner)',9000,1]],
+rs:[['Advance Paid','Paid at booking',5000],['Reamaining Amount Paid','Paid at Check-out',10750]],
+jeep:{jeeps:2,rate:5000,dur:'3 Hr',n:14,charge:5000},
+en:[[1,'Kanan Devan Hills Plantation','07-11-2026',14,50],[2,'Honey Museum','07-11-2026',14,50]],
+ad:[[1,'Resort Staff Tip','Tips',1,100],[2,'Driver Meal','Meals',2,200],[3,'Driver Tea','Meals',1,20]]};
+/* ===== CALCULATIONS ===== */
+const r2=n=>Math.round(n*100)/100,sm=(a,f)=>a.reduce((s,x)=>s+f(x),0),fmt=n=>new Intl.NumberFormat('en-IN',{style:'currency',currency:'INR',maximumFractionDigits:2}).format(n);
+const N=D.mem.length,trv=sm(D.trv.filter(x=>x[3]),x=>x[2]),rst=sm(D.rs,x=>x[2]),jp=D.jeep.charge,en=sm(D.en,x=>x[3]*x[4]),ad=sm(D.ad,x=>x[4]);
+const bill=r2(sm(D.bill,x=>x[1]*x[2])+D.cg+D.sg+D.ro),teaT=D.tea.length*D.teaR,fd=r2(bill+teaT);
+const fp={};D.bf.forEach(r=>fp[r[0]]=r2(r[2]*r[3]+(r[5]||0)*(r[6]||0)+D.gst));D.tea.forEach(n=>fp[n]=r2((fp[n]||0)+D.teaR));
+const CL=['Traveller','Resort & Stay','Jeep Safari','Entry Fees','Food & Dining','Additional'],CV=[trv,rst,jp,en,fd,ad],PAL=['#356854','#6aa084','#c9a227','#d9774b','#4a7fb0','#8a6bb0'];
+const M=D.mem.map(([n,b,c,s,rt])=>{const sh=[trv/N,rst/N,jp/N,en/N,fp[n]||0,ad/N],cost=sm(sh,x=>x);return{n,b,c,s,rt,sh,cost,bal:c-cost,pct:c/b*100}});
+const tot=sm(CV,x=>x),alloc=sm(M,m=>m.cost),col=sm(M,m=>m.c),bud=sm(M,m=>m.b),ret=sm(M,m=>m.bal),un=r2(tot-alloc);
+const pct=(a,b)=>b?Math.round(a/b*1000)/10:0;
+/* ===== TABLES ===== */
+let R={},CH=[];const money=v=>v==null||v===''?'—':typeof v==='number'?fmt(v):v;
+function tbl(id,cols,rows,o={}){R[id]={cols,rows,o,q:'',k:-1,d:1,f:{}};const fo=(o.fk||[]).map(i=>`<select data-f="${id}|${i}" aria-label="Filter ${cols[i].l}"><option value="">${cols[i].l}: All</option>${[...new Set(rows.map(r=>r[i]))].map(v=>`<option>${v}</option>`).join('')}</select>`).join('');
+return `<div class="tb"><input type="search" placeholder="Search…" data-q="${id}" aria-label="Search">${fo}<button class="b" data-csv="${id}">${I('dl')} CSV</button></div><div class="tw"><table id="${id}"></table></div>`}
+function vis(id){const t=R[id];let rs=t.rows.filter(r=>Object.entries(t.f).every(([i,v])=>!v||String(r[i])===v)&&(!t.q||r.join(' ').toLowerCase().includes(t.q)));if(t.k>=0)rs=[...rs].sort((a,b)=>(a[t.k]>b[t.k]?1:a[t.k]<b[t.k]?-1:0)*t.d);return rs}
+function draw(id){const t=R[id],el=document.getElementById(id);if(!el)return;const rs=t.vis=vis(id),c=t.cols;
+el.innerHTML=`<thead><tr>${c.map((x,i)=>`<th class="${x.n?'n':''}" data-s="${id}|${i}">${x.l}${t.k==i?(t.d>0?' ▲':' ▼'):''}</th>`).join('')}</tr></thead><tbody>${rs.length?rs.map((r,ri)=>`<tr ${t.o.x?`class="xr" data-x="${id}|${ri}"`:''}>${c.map((x,i)=>`<td class="${x.n?'n':''}">${x.f?x.f(r[i],r):money(r[i])}</td>`).join('')}</tr>`).join(''):`<tr><td colspan="${c.length}">No matching records</td></tr>`}</tbody>${c.some(x=>x.t)?`<tfoot><tr>${c.map((x,i)=>`<td class="${x.n?'n':''}">${x.t?(x.tf?x.tf(rs):money(r2(sm(rs,r=>+r[i]||0)))):i==0?'Total':''}</td>`).join('')}</tr></tfoot>`:''}`}
+const kv=a=>`<div class="kv">${a.map(([k,v])=>`<div><span>${k}</span><b>${v}</b></div>`).join('')}</div>`;
+const card=(ic,l,v,s)=>`<div class="c st"><div class="ic">${I(ic)}</div><b>${v}</b><span>${l}</span><em>${s||''}</em></div>`;
+const note=h=>`<div class="note">${h}</div>`;
+const gap=(what)=>note(`<b>Not recorded in the workbook:</b> ${what}. Nothing has been assumed.`);
+const bdg=s=>`<span class="bd ${s.replace(/\s/g,'')}">${{Paid:'🟢',Pending:'🔴','Partially Paid':'🟡'}[s]||''} ${s}</span>`;
+const nC={n:1},nT={n:1,t:1};const P=v=>v==null||v===''?'—':v;
+/* ===== VIEWS ===== */
+const V={
+overview(){const pc=pct(col,bud);return `<div class="c hero"><h3>How much did our trip cost?</h3><div class="rw h"><span><b>Total trip expenses</b></span><b>${fmt(tot)}</b></div>${CL.map((l,i)=>`<div class="rw"><span>${l}</span><b>${fmt(CV[i])}</b></div>`).join('')}<div class="rw"><span>Shared among ${N} members</span><b>${fmt(alloc)}</b></div><div class="rw"><span>Average per member</span><b>${fmt(alloc/N)}</b></div><p><b>What does each member pay or receive?</b> Everyone has paid ${fmt(M[0].b)} in full; each member gets a balance back of ${fmt(Math.min(...M.map(m=>m.bal)))} – ${fmt(Math.max(...M.map(m=>m.bal)))} (see Members & Payments).</p></div>
+<h2>${I('layout')} Summary</h2><div class="g">${card('rs','Total Trip Expenses',fmt(tot),'All 6 workbook categories')}${card('users','Total Members',N,'In the member list')}${card('wallet','Total Amount Collected',fmt(col),'of '+fmt(bud)+' budget')}${card('ok','Total Amount Paid Out',fmt(tot),'Recorded expenses (vendors + food)')}${card('warn','Remaining to Collect',fmt(bud-col),bud-col==0?'All members paid in full':'')}${card('users','Expense Per Person',fmt(alloc/N),'Average member share')}${card('wallet','Balance to Return',fmt(ret),M.filter(m=>m.rt=='Pending').length+' of '+N+' returns pending')}</div>
+<h2>${I('layout')} Charts</h2><div class="g g2"><div class="c"><h3>Expense breakdown by category</h3><div class="ch"><canvas id="c1"></canvas></div></div><div class="c"><h3>Category comparison</h3><div class="ch"><canvas id="c2"></canvas></div></div>
+<div class="c"><h3>Member-wise: cost share vs balance to return (of ${fmt(M[0].c)} paid)</h3><div class="ch t"><canvas id="c3"></canvas></div></div><div class="c"><h3>Member-wise contribution by category</h3><div class="ch t"><canvas id="c4"></canvas></div></div></div>
+<div class="c" style="margin-top:12px"><h3>Collected vs pending</h3><p style="margin:4px 0;font-size:13px">Collected ${fmt(col)} of ${fmt(bud)} budget (${pc}%) · Pending ${fmt(bud-col)}</p><div class="bar"><i style="width:${pc}%"></i></div><p style="margin:12px 0 4px;font-size:13px">Of the collected amount: spent ${fmt(alloc)} (${pct(alloc,col)}%) · to return ${fmt(ret)} (${pct(ret,col)}%)</p><div class="bar"><i style="width:${pct(alloc,col)}%"></i><i style="width:${pct(ret,col)}%"></i></div></div>
+<h2>${I('wallet')} Trip Financial Overview</h2>${kv([['Total trip budget',fmt(bud)],['Collected from members',fmt(col)],['Total expenses recorded',fmt(tot)],['Paid to vendors / suppliers (as recorded)',fmt(tot)],['Remaining to collect',fmt(bud-col)],['Shared among members',fmt(alloc)],['Balance to return (member sheet)',fmt(ret)],['Surplus: collected − recorded expenses',fmt(r2(col-tot))],['Expense per person',fmt(alloc/N)]])}
+${note('<b>No double counting:</b> the traveller advance (₹2,000) and resort advance (₹5,000) are part of their category totals and are not added again. <b>Collected</b> is money received from members; <b>paid out</b> is money spent on the trip.')}
+${tbl('cat',[{l:'Category'},{l:'Total',...nT},{l:'% of total',n:1,f:v=>v+'%',t:1,tf:()=>'100%'},{l:'Avg per member',n:1,f:v=>fmt(v)}],CL.map((l,i)=>[l,CV[i],pct(CV[i],tot),r2(CV[i]/N)]))}`},
+members(){const rows=M.map(m=>[m.n,m.b,m.c,m.cost,m.bal,m.s,m.rt,m.pct,m.sh]);
+return `<h2>${I('users')} Members & Payments</h2>${kv([['Members',N],['Collected',fmt(col)],['Shared cost',fmt(alloc)],['Balance to return',fmt(ret)]])}${note('Everyone paid their full budget. <b>Balance</b> = amount paid − share of trip cost, i.e. money to be <b>returned</b> to the member. Tap a row to see the category breakdown. Payment date and mode are not in the workbook.')}
+${tbl('mem',[{l:'Member'},{l:'Budget',n:1,t:1},{l:'Amount Paid',n:1,t:1},{l:'Total Share',n:1,t:1},{l:'Balance to Return',n:1,t:1},{l:'Payment Status',f:bdg},{l:'Return Status',f:bdg},{l:'Paid %',f:v=>`<div class="bar" title="${v.toFixed(0)}%"><i style="width:${v}%"></i></div>${v.toFixed(0)}% paid`},{l:'Breakdown',f:()=>'▾'}],rows,{fk:[5,6],x:r=>`<b>${r[0]}:</b> `+CL.map((l,i)=>`${l} ${fmt(r[8][i])}`).join(' · ')})}`},
+food(){const bf=D.bf.map((r,i)=>{const sub=r[2]*r[3]+(r[5]||0)*(r[6]||0),k=sub+D.gst,t=D.tea.includes(r[0]);return [i+1,r[0],r[1],r[2],r[3],r[4]||'',r[5]||'',r[6]||'',sub,D.gst,r2(k),t?'Tea':'',t?1:'',t?D.teaR:'',fp[r[0]]]});
+return `<h2>${I('utensils')} Food & Dining</h2>${kv([['Total food spend',fmt(fd)],['Breakfast bill (7 Nov)',fmt(bill)],['Tea (8 Nov, '+D.tea.length+' members)',fmt(teaT)]])}${note('Breakfast: <b>07 November 2026</b>, person-wise order, 15 people. Tea: <b>08 November 2026</b>, '+D.tea.length+' members. Paid-by, payment mode and time are not in the workbook.')}
+${tbl('food',[{l:'#',f:P},{l:'Person'},{l:'Food Item 1'},{l:'Qty',n:1,f:P},{l:'Rate',n:1},{l:'Food Item 2'},{l:'Qty',n:1,f:P},{l:'Rate',n:1},{l:'Total (₹)',...nT},{l:'GST',...nT},{l:'Total',...nT},{l:'Tea item'},{l:'Qty',n:1,f:P},{l:'Rate',n:1},{l:'Member total (₹)',...nT}],bf)}
+<h3>Breakfast bill (07 Nov)</h3>${tbl('bill',[{l:'Sl. No.',f:P},{l:'Item'},{l:'Qty',n:1,f:P,t:1,tf:rs=>sm(rs,r=>r[2])},{l:'Rate',n:1},{l:'Amount',...nT}],D.bill.map((b,i)=>[i+1,b[0],b[1],b[2],b[1]*b[2]]))}
+${kv([['Subtotal',fmt(sm(D.bill,x=>x[1]*x[2]))],['CGST (2.5%)',fmt(D.cg)],['SGST (2.5%)',fmt(D.sg)],['Round off',fmt(D.ro)],['Grand total',fmt(bill)]])}`},
+traveller(){const t=D.trip;return `<h2>${I('bus')} Traveller Details</h2>${kv([['Destination',t.dest],['Start date',new Date(t.start).toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'})],['Duration',t.dur],['Total members',t.n],['Vehicle',t.veh],['Includes',t.inc],['Total traveller expenses',fmt(trv)]])}${gap('each member’s place and pickup point')}
+${tbl('trv',[{l:'Expense Item'},{l:'Details'},{l:'Amount',n:1},{l:'Counted in total',f:v=>v?'Yes':'No'}],D.trv.map(r=>[r[0],r[1],r[2],r[3]]),{})}`},
+resort(){return `<h2>${I('bed')} Resort & Stay</h2>${kv([['Location','Vattavada'],['Resort','Mountain Hut Resorts'],['Category','4 bedroms & 2 living rooms'],['Total members',15],['Check in','07/11/2026 (2pm)'],['Check out','08/11/2026 (11am)'],['Total resort expenses',fmt(rst)]])}${tbl('rs',[{l:'Expense Item'},{l:'Details'},{l:'Amount',...nT}],D.rs)}`},
+jeep(){const j=D.jeep;return `<h2>${I('car')} Jeep Safari</h2>${kv([['Total jeeps',j.jeeps],['Jeep safari rate',fmt(j.rate)],['Duration',j.dur],['Total members',j.n],['Total charge',fmt(j.charge)]])}${note('<b>To confirm:</b> the workbook records ₹5,000 as the total charge for 2 jeeps. Payment date, mode and payee are not recorded.')}`},
+entry(){return `<h2>${I('ticket')} Entry Fees</h2>${kv([['Total entry fees',fmt(en)]])}${tbl('en',[{l:'#',f:P},{l:'Place / Attraction'},{l:'Date'},{l:'Members',n:1,f:P},{l:'Per Person (₹)',n:1},{l:'Total Entry Fee (₹)',...nT}],D.en.map(r=>[...r,r[3]*r[4]]))}${gap('payment mode and who paid')}`},
+additional(){return `<h2>${I('brief')} Additional Expenses</h2>${kv([['Total additional expenses',fmt(ad)]])}${tbl('ad',[{l:'#',f:P},{l:'Expense Description'},{l:'Category'},{l:'Qty',n:1,f:P},{l:'Amount',...nT}],D.ad,{fk:[2]})}${gap('date, paid-by and payment mode')}`}};
+const NAV=[['overview','Overview','layout'],['members','Members & Payments','users'],['food','Food & Dining','utensils'],['traveller','Traveller Details','bus'],['resort','Resort & Stay','bed'],['jeep','Jeep Safari','car'],['entry','Entry Fees','ticket'],['additional','Additional Expenses','brief']];
+/* ===== CHARTS ===== */
+function charts(){if(!window.Chart)return;CH.forEach(c=>c.destroy());CH=[];const cs=getComputedStyle(document.documentElement);Chart.defaults.color=cs.getPropertyValue('--mu').trim();Chart.defaults.font.family='inherit';
+const mk=(id,cfg)=>{const e=document.getElementById(id);if(e){cfg.options=Object.assign({responsive:true,maintainAspectRatio:false},cfg.options);CH.push(new Chart(e,cfg))}},ax=v=>'₹'+v.toLocaleString('en-IN');
+mk('c1',{type:'doughnut',data:{labels:CL,datasets:[{data:CV.map(r2),backgroundColor:PAL,borderWidth:0}]},options:{cutout:'62%',plugins:{legend:{position:'bottom'}}}});
+mk('c2',{type:'bar',data:{labels:CL,datasets:[{data:CV.map(r2),backgroundColor:PAL,borderRadius:6}]},options:{plugins:{legend:{display:false}},scales:{y:{ticks:{callback:ax}}}}});
+mk('c3',{type:'bar',data:{labels:M.map(m=>m.n),datasets:[{label:'Cost share',data:M.map(m=>r2(m.cost)),backgroundColor:'#356854'},{label:'Balance to return',data:M.map(m=>r2(m.bal)),backgroundColor:'#9fc8b3'}]},options:{indexAxis:'y',scales:{x:{stacked:true,ticks:{callback:ax}},y:{stacked:true}}}});
+mk('c4',{type:'bar',data:{labels:M.map(m=>m.n),datasets:CL.map((l,i)=>({label:l,data:M.map(m=>r2(m.sh[i])),backgroundColor:PAL[i]}))},options:{indexAxis:'y',scales:{x:{stacked:true,ticks:{callback:ax}},y:{stacked:true}}}})}
+/* ===== ROUTER & EVENTS ===== */
+const app=document.getElementById('app');
+function paint(){app.querySelectorAll('table[id]').forEach(t=>draw(t.id))}
+function route(){const h=(location.hash||'').slice(1),k=V[h]?h:'overview';R={};app.innerHTML=V[k]();paint();if(k=='overview')charts();document.querySelectorAll('nav a').forEach(a=>a.classList.toggle('on',a.dataset.k==k))}
+document.getElementById('lg').innerHTML=I('wallet');document.getElementById('pr').innerHTML=I('print')+' Print / PDF';
+document.getElementById('nav').innerHTML=NAV.map(n=>`<a href="#${n[0]}" data-k="${n[0]}">${I(n[2])}${n[1]}</a>`).join('');
+addEventListener('hashchange',()=>{route();scrollTo(0,0)});
+document.addEventListener('input',e=>{const id=e.target.dataset.q;if(id){R[id].q=e.target.value.toLowerCase();draw(id)}});
+document.addEventListener('change',e=>{const f=e.target.dataset.f;if(f){const[id,i]=f.split('|');R[id].f[i]=e.target.value;draw(id)}});
+async function csv(id){const t=R[id],q=v=>`"${String(v??'').replace(/"/g,'""')}"`,s=[t.cols.map(c=>q(c.l)).join(','),...vis(id).map(r=>r.slice(0,t.cols.length).map(q).join(','))].join('\n');
+try{const d=await claude.use('downloads');if(!d)throw 0;try{await d.save({filename:id+'.csv',data:new Blob([s],{type:'text/csv'})})}catch(e){if(e&&e.code=='bad_request')await d.save({filename:id+'.csv',data:s});else throw e}}catch(e){if(!e||e.code!='declined')alert('CSV download is not available in this view. Open the page in the full artifact view to export.')}}
+document.addEventListener('click',e=>{const t=e.target,b=t.closest('[data-csv]');if(b)return csv(b.dataset.csv);
+const th=t.closest('th[data-s]');if(th){const[id,i]=th.dataset.s.split('|'),r=R[id];r.d=r.k==+i?-r.d:1;r.k=+i;return draw(id)}
+const tr=t.closest('tr[data-x]');if(tr){const[id,ri]=tr.dataset.x.split('|'),n=tr.nextElementSibling;if(n&&n.classList.contains('xdr'))return n.remove();const x=document.createElement('tr');x.className='xdr';x.innerHTML=`<td class="xd" colspan="${R[id].cols.length}">${R[id].o.x(R[id].vis[ri])}</td>`;tr.after(x)}});
+function printAll(){R={};app.innerHTML=NAV.map(n=>`<section class="ps">${V[n[0]]()}</section>`).join('');paint();charts();setTimeout(()=>{try{print()}catch(e){alert('Printing is not available in this view. Open the artifact in its own tab and use Print / Save as PDF.')}},500)}
+document.getElementById('pr').onclick=printAll;addEventListener('afterprint',route);route();
+</script></body></html>
